@@ -8,7 +8,7 @@ async function executarSQL(sql){
         database: 'refo9178_fs31'
     });
 
-    const [result] = conexao.query(sql);
+    const [result] = await conexao.query(sql);
     conexao.end();
 
     return result;
