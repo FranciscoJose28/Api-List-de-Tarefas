@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { executarSQL } = require("../database");
+require('dotenv').config();
 
 async function logar(data){
     try {
@@ -15,7 +16,7 @@ async function logar(data){
         if(response.length > 0){
             const token = jwt.sign({
                 data: response.usuario_id
-            }, 'fs31', { expiresIn: '1h' });
+            }, process.env.secret, { expiresIn: '1h' });
             return {
                 token
             }
