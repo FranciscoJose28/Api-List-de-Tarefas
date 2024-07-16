@@ -5,6 +5,8 @@ const cors = require("cors");
 
 const tarefaRoutes = require('./src/routes/tarefaRoutes');
 const usuarioRoutes = require('./src/routes/usuarioRoutes');
+const { lockIt } = require("./utils");
+
 
 app.use(cors());
 app.use(express.json());
@@ -14,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/usuarios', usuarioRoutes);
-app.use('/tarefas', (tarefaRoutes));
+app.use('/tarefas', lockIt, (tarefaRoutes));
 
 app.all("*", (req, res) => {
     res.status(404).send("Página não encontrada");
